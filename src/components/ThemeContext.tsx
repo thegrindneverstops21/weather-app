@@ -26,7 +26,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     localStorage.setItem('weather-app-theme', theme);
   }, [theme]);
 
-  {/* function to toggle the theme */}
+  {/* function to handle the theme switch */}
   const toggleTheme = () => {
     setTheme((prev) => (prev === "light" ? "dark" : "light"));
   };

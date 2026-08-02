@@ -1,3 +1,4 @@
+/* API provider response shape */
 export interface OpenMeteoResponse {
     latitude: number;
     longitude: number;
@@ -7,6 +8,7 @@ export interface OpenMeteoResponse {
     daily: DailyRaw;
 }
 
+/* defines structure of the current weather data */
 export interface CurrentWeatherRaw {
     time: string;
     temperature_2m: number;
@@ -20,6 +22,7 @@ export interface CurrentWeatherRaw {
     is_day: number;
 }
 
+/* defines structure of the hourly weather data */
 export interface HourlyRaw {
     time: string[];
     temperature_2m: number[];
@@ -31,6 +34,7 @@ export interface HourlyRaw {
     visibility: number[];
 }
 
+/* defines structure of the daily weather data */
 export interface DailyRaw {
     time: string[];
     weather_code: number[];
@@ -42,6 +46,7 @@ export interface DailyRaw {
     precipitation_probability_max: number[];
 }
 
+/* defines current weather conditions */
 export interface CurrentWeather {
     temperature: number;
     feelsLike: number;
@@ -54,6 +59,7 @@ export interface CurrentWeather {
     time: string;
 }
 
+/* defines hourly weather conditions */
 export interface HourlyWeather {
     time: string[];
     temperature: number[];
@@ -65,6 +71,7 @@ export interface HourlyWeather {
     visibility: number[];
 }
 
+/* defines daily weather conditions */
 export interface DailyWeather {
     date: string;
     weatherCode: number;
@@ -76,6 +83,7 @@ export interface DailyWeather {
     precipitationProbability: number;
 }
 
+/* defines the location structure for the weather app */
 export interface Location {
     id: string;
     name: string;
@@ -85,6 +93,7 @@ export interface Location {
     isCurrentLocation?: boolean;
 }
 
+/* declares reusable types for the weather app */
 export type TemperatureUnit = "C" | "F";
 export type WindSpeedUnit = "km/h" | "mph";
 export type PressureUnit = "hPa" | "inHg";
@@ -92,6 +101,7 @@ export type VisibilityUnit = "km" | "mi";
 export type PrecipitationUnit = "mm" | "in";
 export type ForecastView = "hourly" | "daily";
 
+/* defines the structure for unit settings in the weather app */
 export interface UnitSettings {
     temperature: TemperatureUnit;
     windSpeed: WindSpeedUnit;
@@ -100,6 +110,7 @@ export interface UnitSettings {
     precipitation: PrecipitationUnit;   
 }
 
+/* defines the default unit settings for the weather app */
 export const DEFAULT_UNITS: UnitSettings = {
     temperature: "C",
     windSpeed: "km/h",
