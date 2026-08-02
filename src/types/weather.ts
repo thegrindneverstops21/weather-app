@@ -91,3 +91,19 @@ export type PressureUnit = "hPa" | "inHg";
 export type VisibilityUnit = "km" | "mi";
 export type PrecipitationUnit = "mm" | "in";
 export type ForecastView = "hourly" | "daily";
+
+export interface UnitSettings {
+    temperature: TemperatureUnit;
+    windSpeed: WindSpeedUnit;
+    pressure: PressureUnit;
+    visibility: VisibilityUnit;
+    precipitation: PrecipitationUnit;   
+}
+
+export const DEFAULT_UNITS: UnitSettings = {
+    temperature: "C",
+    windSpeed: "km/h",
+    pressure: "hPa",
+    visibility: "km",
+    precipitation: "mm",
+};
