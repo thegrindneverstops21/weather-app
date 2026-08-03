@@ -10,9 +10,10 @@
 }
 
 .empty-state-illustration {
-    color: var(--text-secondary);
-    opacity: 0.6;
-    margin-bottom: 0.5rem;
+    width: 100%;
+    max-width: 50%;
+    height:  auto;
+    margin-bottom: 1.5rem;
 }
 
 .empty-state-title {
