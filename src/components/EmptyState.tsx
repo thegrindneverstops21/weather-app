@@ -1,5 +1,5 @@
 import { Search } from 'lucide-react';
-
+import './styles/EmptyState.css';
 
 interface EmptyStateProps {
     onSearchClick?: () => void;
