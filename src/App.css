@@ -1,0 +1,27 @@
+.app {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem 1.5rem 3rem;
+}
+
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 0;
+}
+
+.app-logo {
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.app-main {
+  margin-top: 1.5rem;
+}
+
+.app-loading {
+  color: var(--text-secondary);
+  text-align: center;
+  padding: 3rem 0;
+}

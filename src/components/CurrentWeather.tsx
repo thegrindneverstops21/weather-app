@@ -2,6 +2,7 @@ import { type Location, type CurrentWeather as CurrentWeatherType, type UnitSett
 import { getWeatherInfo } from '../services/weatherCodeMap';
 import { convertTemperature, formatValue } from '../services/unitConversions';
 import WeatherIcon from './WeatherIcon';
+import { MapPin } from 'lucide-react';
 import './styles/CurrentWeather.css';
 
 interface CurrentWeatherProps {
@@ -29,7 +30,8 @@ export default function CurrentWeather({ location, weather, units}: CurrentWeath
     return(
         <div className="current-weather">
             <div className="location-pill">
-                <span>{location.isCurrentLocation ? '📍' : '' } {location.name}</span>
+                {location.isCurrentLocation && <MapPin size={14} />}
+                <span>{location.name}</span>
             </div>
 
             <div className="current-weather-icon">
