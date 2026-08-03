@@ -2,6 +2,7 @@ import type { OpenMeteoResponse, CurrentWeather, HourlyWeather, DailyWeather } f
 
 const BASE_URL = 'https://api.open-meteo.com/v1/forecast';
 
+/* requesting data from API */
 export async function fetchWeatherData(latitude: number, longitude: number): Promise<OpenMeteoResponse> {
     const params = new URLSearchParams({
         latitude: latitude.toString(),
@@ -39,8 +40,10 @@ export async function fetchWeatherData(latitude: number, longitude: number): Pro
         forecast_days: '7',
     });
 
+    /* send weather request to API */
     const response = await fetch(`${BASE_URL}?${params.toString()}`);
 
+    /* throw error message to handle the Promise if it fails */
     if (!response.ok) {
         throw new Error(`Failed to fetch weather data: ${response.status}`);
     }
@@ -57,8 +60,10 @@ export async function searchLocations(query: string) {
         format: 'json', 
     });
 
+    /* request to return city names as latitude & longitude coordinates */ 
     const response = await fetch(`https://geocoding-api.open-meteo.com/v1/search?${params.toString()}`);
 
+    /* throw error message if response is not valid */
     if (!response.ok) {
         throw new Error(`Failed to search locations: ${response.status}`);
     }
@@ -67,6 +72,7 @@ export async function searchLocations(query: string) {
     return data.results ?? [];
 }
 
+/* a function that converts the current raw weather data  */
 export function mapCurrentWeather(raw: OpenMeteoResponse): CurrentWeather {
     const current = raw.current;
     return {
@@ -82,6 +88,7 @@ export function mapCurrentWeather(raw: OpenMeteoResponse): CurrentWeather {
     };
 }
 
+/* converts the current hourly raw weather data */
 export function mapHourlyWeather(raw: OpenMeteoResponse): HourlyWeather[] {
     const hourly = raw.hourly;
     return hourly.time.map((time, index) => ({
@@ -96,6 +103,7 @@ export function mapHourlyWeather(raw: OpenMeteoResponse): HourlyWeather[] {
     }));
 }
 
+/* converts the daily current raw weather data */
 export function mapDailyWeather(raw: OpenMeteoResponse): DailyWeather[] {
     const daily = raw.daily;
     return daily.time.map((date, index) => ({

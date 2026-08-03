@@ -28,6 +28,7 @@ const WEATHER_CODES: Record<number, { day: WeatherCodeInfo; night: WeatherCodeIn
     99: { day: { label: 'Thunderstorm with heavy hail', icon: 'CloudLightning'}, night: { label: 'Thunderstorm with heavy hail', icon: 'CloudLightning'} }
 };
 
+/* translate raw weather data to description and icon & has a fallback if the label is unknown */
 export function getWeatherInfo(code: number, isDay: boolean): WeatherCodeInfo {
     const entry = WEATHER_CODES[code];
     if (!entry) {
