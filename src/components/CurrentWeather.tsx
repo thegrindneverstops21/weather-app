@@ -5,23 +5,26 @@ import WeatherIcon from './WeatherIcon';
 import { MapPin } from 'lucide-react';
 import './styles/CurrentWeather.css';
 
+/* interface that represents the location, weather and unit of measurement */
 interface CurrentWeatherProps {
     location: Location;
     weather: CurrentWeatherType;
     units: UnitSettings;
 }
 
+/* a function component*/
 export default function CurrentWeather({ location, weather, units}: CurrentWeatherProps ){
     const info = getWeatherInfo(weather.weatherCode, weather.isDay);
     const temp = convertTemperature(weather.temperature, units.temperature);
 
+    /* a date object that formats the date to localized date */
     const formattedDate = new Date(weather.time).toLocaleDateString('en-ZA', {
         day: 'numeric',
         month: 'long',
         year: 'numeric',
         weekday: 'long',
     });
-
+    /* date object that formats the time to localized time*/
     const formattedTime = new Date(weather.time).toLocaleDateString('en-ZA', {
         hour: 'numeric',
         minute: '2-digit',
