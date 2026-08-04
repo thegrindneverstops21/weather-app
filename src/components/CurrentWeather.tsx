@@ -25,7 +25,7 @@ export default function CurrentWeather({ location, weather, units}: CurrentWeath
         weekday: 'long',
     });
     /* date object that formats the time to localized time*/
-    const formattedTime = new Date(weather.time).toLocaleDateString('en-ZA', {
+    const formattedTime = new Date(weather.time).toLocaleTimeString('en-ZA', {
         hour: 'numeric',
         minute: '2-digit',
     });
