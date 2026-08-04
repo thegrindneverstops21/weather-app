@@ -4,18 +4,12 @@ import {
     Droplets, Thermometer, Gauge, Eye, Sunrise, History,
     type LucideIcon,
 } from 'lucide-react';
-import type { LucideIcon } from 'lucide-react';
 
+/* table for weather icons */
 const ICON_MAP: Record<string, LucideIcon> = {
     Sun, Moon, CloudSun, CloudMoon, Cloud, CloudFog, CloudDrizzle,
     CloudRain, CloudRainWind, CloudSnow, CloudLightning,
     Droplets, Thermometer, Gauge, Eye, Sunrise, History,
-};
-
-
-/* table for weather icons */
-const ICON_MAP: Record<string, LucideIcon> = {
-    Sun, Moon, CloudSun, CloudMoon, Cloud, CloudFog, CloudDrizzle, CloudRain, CloudRainWind, CloudSnow, CloudLightning,
 };
 
 /*interface that defines the shape of the Icon properties */
