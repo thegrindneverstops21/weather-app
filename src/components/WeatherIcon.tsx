@@ -1,7 +1,17 @@
 import {
-    Sun, Moon, CloudSun, CloudMoon, Cloud, CloudFog, CloudDrizzle, CloudRain, CloudRainWind, CloudSnow, CloudLightning, HelpCircle
+    Sun, Moon, CloudSun, CloudMoon, Cloud, CloudFog, CloudDrizzle,
+    CloudRain, CloudRainWind, CloudSnow, CloudLightning, HelpCircle,
+    Droplets, Thermometer, Gauge, Eye, Sunrise, History,
+    type LucideIcon,
 } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
+
+const ICON_MAP: Record<string, LucideIcon> = {
+    Sun, Moon, CloudSun, CloudMoon, Cloud, CloudFog, CloudDrizzle,
+    CloudRain, CloudRainWind, CloudSnow, CloudLightning,
+    Droplets, Thermometer, Gauge, Eye, Sunrise, History,
+};
+
 
 /* table for weather icons */
 const ICON_MAP: Record<string, LucideIcon> = {
