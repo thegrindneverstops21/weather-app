@@ -16,6 +16,12 @@
   font-weight: 600;
 }
 
+.app-logo-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
 .app-main {
   margin-top: 1.5rem;
 }
@@ -41,4 +47,18 @@
   color: var(--text-secondary);
   margin-bottom: 1rem;
   text-align: center;
+}
+
+.app-layout {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 1.5rem;
+  align-items: start;
+  margin-top: 1rem;
+}
+
+@media (max-width: 768px) {
+  .app-layout {
+    grid-template-columns: 1fr;
+  }
 }

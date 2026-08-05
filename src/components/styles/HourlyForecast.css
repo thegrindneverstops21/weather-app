@@ -1,9 +1,8 @@
 .hourly-forecast {
     display: flex;
     gap: 0.75rem;
-    overflow-x: auto;
     padding: 1rem 0.25rem;
-    scrollbar-width: thin;
+    flex-wrap: wrap;
 }
 
 .hourly-item {
@@ -29,4 +28,76 @@
     font-size: 0.9rem;
     font-weight: 600;
     color: var(--text-primary);
+}
+
+.hourly-forecast-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.hourly-forecast-row {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.hourly-scroll-btn {
+    flex-shrink: 0;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-primary);
+    box-shadow: 0 2px 6px var(--shadow);
+    z-index: 5;
+}
+.hourly-scroll-btn-left {
+    margin-right: 0.4rem;
+}
+
+.hourly-scroll-btn-right {
+    margin-left: 0.4rem;
+}
+
+.hourly-forecast.scrollable {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+    scroll-behavior: smooth;
+
+}
+
+.hourly-forecast.scrollable::-webkit-scrollbar {
+    display: none;
+}
+
+.hourly-toggle-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.3rem;
+    align-self: center;
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 0.4rem 1rem;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+.hourly-toggle-button:hover {
+    background: var(--bg-card);
+}
+
+@media(max-width: 480px) {
+    .hourly-forecast:not(.scrollable) {
+        display: flex;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 0.5rem;
+    }
 }

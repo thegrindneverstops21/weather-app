@@ -29,7 +29,7 @@ export default function SearchBar({ onLocationSelect }: SearchBarProps) {
         const timeoutId = setTimeout(async () => {
             try {
                 const raw = await searchLocations(query);
-                const mapped: Location[] = raw.map((r: any) => ({
+                const mapped: Location[] = raw.map((r: { latitude: number; longitude: number; name: string; country?: string }) => ({
                     id: `${r.latitude}-${r.longitude}`,
                     name: r.name,
                     country: r.country ?? '',

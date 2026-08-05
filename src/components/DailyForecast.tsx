@@ -1,11 +1,11 @@
-import { type DailyForecastItem, type UnitSettings } from '../types/weather';
+import { type DailyWeather, type UnitSettings } from '../types/weather';
 import { getWeatherInfo } from '../services/weatherCodeMap';
 import { convertTemperature, formatValue } from '../services/unitConversions';
 import WeatherIcon from './WeatherIcon';
 import './styles/DailyForecast.css';
 
 interface DailyForecastProps {
-    daily: DailyForecastItem[];
+    daily: DailyWeather[];
     units: UnitSettings;
 }
 

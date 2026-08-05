@@ -30,7 +30,7 @@
 }
 
 body {
-  font-family: 'Segoe UI', system-ui, sans-serif;
+  font-family: 'DynaPuff', system-ui, sans-serif;
   background-color: var(--bg-primary);
   color: var(--text-primary);
   transition: background-color var(--transition), color var(--transition);

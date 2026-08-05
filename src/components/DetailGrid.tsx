@@ -1,12 +1,12 @@
-import { type CurrentWeather, type HourlyForecastItem, type DailyForecastItem, type UnitSettings } from '../types/weather';
+import { type CurrentWeather, type HourlyWeather, type DailyWeather, type UnitSettings } from '../types/weather';
 import { convertWindSpeed, convertPressure, convertVisibility, formatValue } from '../services/unitConversions';
 import DetailCard from './DetailCard';
-import './styles/DetailsGrid.css';
+import './styles/DetailGrid.css';
 
 interface DetailsGridProps {
     current: CurrentWeather;
-    hourlyNow: HourlyForecastItem | undefined;
-    dailyToday: DailyForecastItem | undefined;
+    hourlyNow: HourlyWeather | undefined;
+    dailyToday: DailyWeather | undefined;
     units: UnitSettings;
 }
 
@@ -23,7 +23,8 @@ export default function DetailsGrid({ current, hourlyNow, dailyToday, units }: D
             <DetailCard
                 icon="Sun"
                 label="UV Index"
-                value={hourlyNow ? formatValue(hourlyNow.uvIndex, 1) : '--'}
+                value={hourlyNow ? formatValue(Array.isArray(hourlyNow.uvIndex) ? hourlyNow.uvIndex[0] : hourlyNow.uvIndex) : '--'}
+                unit={`°${units.temperature}`}
             />
             <DetailCard
                 icon="Droplets"
@@ -40,7 +41,7 @@ export default function DetailsGrid({ current, hourlyNow, dailyToday, units }: D
             <DetailCard
                 icon="Thermometer"
                 label="Dew Point"
-                value={hourlyNow ? formatValue(hourlyNow.dewPoint) : '--'}
+                value={hourlyNow ? formatValue(Array.isArray(hourlyNow.dewPoint) ? hourlyNow.dewPoint[0] : hourlyNow.dewPoint) : '--'}
                 unit={`°${units.temperature}`}
             />
             <DetailCard
@@ -52,7 +53,7 @@ export default function DetailsGrid({ current, hourlyNow, dailyToday, units }: D
             <DetailCard
                 icon="Eye"
                 label="Visibility"
-                value={hourlyNow ? formatValue(convertVisibility(hourlyNow.visibility, units.visibility), 1) : '--'}
+                value={hourlyNow ? formatValue(convertVisibility(Array.isArray(hourlyNow.visibility) ? hourlyNow.visibility[0] : hourlyNow.visibility, units.visibility), 1) : '--'}
                 unit={units.visibility}
             />
             <DetailCard icon="Sunrise" label="Sun">
