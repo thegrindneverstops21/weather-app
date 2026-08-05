@@ -1,0 +1,42 @@
+.details-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.sun-times {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.sun-times > div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.sun-times-label {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+}
+
+/* responsive breakpoints per task requirement: 320, 480, 768, 1024, 1200 */
+@media (max-width: 1024px) {
+    .details-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .details-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .details-grid {
+        grid-template-columns: 1fr;
+    }
+}
