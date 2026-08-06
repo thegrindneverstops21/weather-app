@@ -47,11 +47,12 @@ export default function SearchBar({ onLocationSelect }: SearchBarProps) {
         }, 400);
 
         return () => clearTimeout(timeoutId);
-    }, [query]);
+    }, [query]);// Dependency array, effect runs whenever this value changes
 
     /* close the dropdown when clicking outside the search bar */
     useEffect(() => {
         function handleClickOutside(event: MouseEvent) {
+            // Checks if the element the mouse clicked belongs to the search bar ui
             if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
                 setOpen(false);
             }
@@ -60,6 +61,7 @@ export default function SearchBar({ onLocationSelect }: SearchBarProps) {
         return () => document.removeEventListener('mousedown', handleClickOutside);
     }, []);
 
+    // A function that adds/saves the location selected by the user
     const handleSelect = (location: Location) => {
         addLocation(location);
         setActiveLocation(location);
@@ -69,11 +71,12 @@ export default function SearchBar({ onLocationSelect }: SearchBarProps) {
         onLocationSelect?.();
     };
 
+    // A function that clears the search bar when user clears their input
     const handleClear = () => {
         setQuery('');
         setResults([]);
-        setOpen(false);
-    };
+       setOpen(false);
+    }; 
 
     return (
         <div className="search-bar" ref={containerRef}>
