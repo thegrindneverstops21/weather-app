@@ -64,17 +64,6 @@
     margin-left: 0.4rem;
 }
 
-.hourly-forecast.scrollable {
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    scrollbar-width: none;
-    scroll-behavior: smooth;
-
-}
-
-.hourly-forecast.scrollable::-webkit-scrollbar {
-    display: none;
-}
 
 .hourly-toggle-button {
     display: flex;
@@ -93,6 +82,24 @@
 .hourly-toggle-button:hover {
     background: var(--bg-card);
 }
+
+/* Enable native swipe physics for mobile touch devices */
+.hourly-forecast.scrollable {
+    overflow-x: auto;
+    -ms-overflow-style: none; 
+    scroll-behavior: smooth;
+}
+
+.hourly-forecast.scrollable::-webkit-scrollbar {
+    display: none; 
+}
+
+/* Grabbing visual states */
+.hourly-forecast.grabbing {
+    cursor: grabbing !important;
+    scroll-behavior: auto; 
+}
+
 
 @media(max-width: 480px) {
     .hourly-forecast:not(.scrollable) {
