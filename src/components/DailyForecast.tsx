@@ -20,14 +20,14 @@ export default function DailyForecast({ daily, units }: DailyForecastProps) {
                         : new Date(day.date).toLocaleDateString('en-ZA', { weekday: 'short' });
 
                 return (
-                    <div key={day.date} className="daily-item">
-                        <span className="daily-day">{label}</span>
-                        <WeatherIcon icon={info.icon} size={24} />
-                        <div className="daily-temps">
-                            <span className="daily-temp-max">
+                    <div key={day.date} className="daily-card">
+                        <span className="daily-card-day">{label}</span>
+                        <WeatherIcon icon={info.icon} size={28} />
+                        <div className="daily-card-temps">
+                            <span className="daily-card-max">
                                 {formatValue(convertTemperature(day.tempMax, units.temperature))}°
                             </span>
-                            <span className="daily-temp-min">
+                            <span className="daily-card-min">
                                 {formatValue(convertTemperature(day.tempMin, units.temperature))}°
                             </span>
                         </div>
