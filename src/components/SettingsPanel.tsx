@@ -2,6 +2,7 @@ import { X, Settings } from 'lucide-react';
 import type { UnitSettings } from '../types/weather';
 import { useState } from 'react';
 import { useUnits } from './UnitContext';
+import './styles/SettingPanel.css';
 
 
 interface UnitOption<K extends keyof UnitSettings> {
@@ -68,7 +69,7 @@ export default function SettingsPanel() {
                         <div className='settings-panel-body'>
                             {UNIT_OPTIONS.map((group) => (
                                 <div key={group.key} className='settings-row'>
-                                    <span className='setting-roe-label'>{group.label}</span>
+                                    <span className='setting-row-label'>{group.label}</span>
                                     <div className='setting-row-pills'>
                                         {group.options.map((opt) => (
                                             <button key={String(opt.value)} className={`setting-pill ${units[group.key] === opt.value ? 'active' : ''}`} onClick={() => setUnit(group.key, opt.value)} >

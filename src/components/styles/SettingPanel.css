@@ -1,0 +1,112 @@
+.settings-trigger {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 6px var(--shadow);
+    color: var(--text-primary);
+    transition: transform var(--transition);
+}
+
+.settings-trigger:hover {
+    transform: scale(1.08);
+}
+
+.setting-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.35);
+    display: flex;
+    justify-content: flex-end;
+    z-index: 100;
+}
+
+.setting-panel {
+    width: 320px;
+    max-width: 85vw;
+    height: 100%;
+    background: var(--bg-primary);
+    box-shadow: -4px 0 20px var(--shadow);
+    display: flex;
+    flex-direction: column;
+    animation: slide-in 0.2s ease;
+}
+
+@keyframes slide-in {
+    from { transform: translateX(100%); }
+    to { transform: translateX(0); }
+}
+
+.settings-panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.settings-panel-header h2 {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.settings-close {
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+}
+
+.settings-panel-body {
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    overflow-y: auto;
+}
+
+.settings-row {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.setting-row-label {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+.setting-row-pills {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.setting-pill {
+    flex: 1;
+    padding: 0.5rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--bg-card);
+    color: var(--text-primary);
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: background var(--transition), color var(--transition);
+}
+
+.setting-pill.active {
+    background: var(--accent);
+    color: white;
+    border-color: var(--accent);
+}
+
+@media (max-width: 480px) {
+    .setting-panel {
+        width: 100%;
+        max-width: 100vw;
+    }
+}

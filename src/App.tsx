@@ -12,10 +12,13 @@ import ForecastToggle from './components/ForecastToggle';
 import HourlyForecast from './components/HourlyForecast';
 import DailyForecast from './components/DailyForecast';
 import './App.css';
+import { useUnits } from './components/UnitContext';
+import SettingsPanel from './components/SettingsPanel';
 
 function App() {
     const { activeLocation, geolocationLoading } = useLocation();
     const { current, hourly, daily, loading, error } = useWeather(activeLocation);
+    const { units } = useUnits();
     const [view, setView] = useState<ForecastView>('hourly');
 
     return (
@@ -29,6 +32,7 @@ function App() {
 
                 <div className="app-header-actions">
                     <SearchBar />
+                    <SettingsPanel />
                     <ThemeToggle />
                 </div>
             </header>
@@ -51,16 +55,16 @@ function App() {
                             <ForecastToggle view={view} onChange={setView} />
 
                             {view === 'hourly' ? (
-                                <HourlyForecast hourly={hourly} units={DEFAULT_UNITS} />
+                                <HourlyForecast hourly={hourly} units={units} />
                             ) : (
-                                <DailyForecast daily={daily} units={DEFAULT_UNITS} />
+                                <DailyForecast daily={daily} units={units} />
                             )}
 
                             <DetailsGrid
                                 current={current}
                                 hourlyNow={hourly[0]}
                                 dailyToday={daily[0]}
-                                units={DEFAULT_UNITS}
+                                units={units}
                             />
                         </div>
                     </div>
