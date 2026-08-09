@@ -5,13 +5,16 @@ import { ThemeProvider } from './components/ThemeContext';
 import { LocationProvider } from './components/LocationContext';
 import App from './App';
 import './index.css';
+import { UnitProvider } from './components/UnitContext';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <BrowserRouter>
       <ThemeProvider>
         <LocationProvider>
-          <App />
+          <UnitProvider>
+            <App />
+          </UnitProvider>
         </LocationProvider>
       </ThemeProvider>
     </BrowserRouter>
