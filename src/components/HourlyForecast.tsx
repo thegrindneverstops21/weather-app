@@ -11,7 +11,7 @@ interface HourlyForecastProps {
     units: UnitSettings;
 }
 
-const COLLAPSED_COUNT = 8;
+const COLLAPSED_COUNT = 7;
 
 export default function HourlyForecast({ hourly, units }: HourlyForecastProps) {
     const [expanded, setExpanded] = useState(false);
@@ -77,7 +77,7 @@ export default function HourlyForecast({ hourly, units }: HourlyForecastProps) {
                     return (
                         <div key={hourTime} className="hourly-item">
                             <span className="hourly-time">{time}</span>
-                            <WeatherIcon icon={info.icon} size={26} />
+                            <WeatherIcon icon={info.icon} size={30} />
                             <span className="hourly-temp">
                                 {formatValue(convertTemperature(temperature, units.temperature))}°
                             </span>

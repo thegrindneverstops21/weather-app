@@ -24,7 +24,6 @@ export default function DetailsGrid({ current, hourlyNow, dailyToday, units }: D
                 icon="Sun"
                 label="UV Index"
                 value={hourlyNow ? formatValue(Array.isArray(hourlyNow.uvIndex) ? hourlyNow.uvIndex[0] : hourlyNow.uvIndex) : '--'}
-                unit={`°${units.temperature}`}
             />
             <DetailCard
                 icon="Droplets"

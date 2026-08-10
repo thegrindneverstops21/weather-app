@@ -25,7 +25,7 @@ const UNIT_OPTIONS: UnitOption<keyof UnitSettings>[] = [
         label: 'Wind Speed',
         options: [
             { value: 'km/h', label: 'km/h' },
-            { value: 'C', label: 'mph' },
+            { value: 'mph', label: 'mph' },
         ],
     },
     {
@@ -36,6 +36,14 @@ const UNIT_OPTIONS: UnitOption<keyof UnitSettings>[] = [
             { value: 'inHg', label: 'inHg' },
         ],
     },
+    {
+        key: 'visibility',
+        label: 'Visibility',
+        options: [
+            { value: 'km', label: 'km' },
+            { value: 'mi', label: 'mi' },
+    ],
+},
     {
         key: 'precipitation',
         label: 'Precipitation',

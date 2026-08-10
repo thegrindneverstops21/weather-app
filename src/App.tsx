@@ -1,8 +1,9 @@
 import { useState } from 'react';
-import { Cloud } from 'lucide-react'; // 1. Import Cloud icon
+import { Cloud } from 'lucide-react';
 import { useLocation } from './components/LocationContext';
 import { useWeather } from './hooks/useWeather';
-import { DEFAULT_UNITS, type ForecastView } from './types/weather';
+import { useUnits } from './components/UnitContext';
+import { type ForecastView } from './types/weather';
 import ThemeToggle from './components/ThemeToggle';
 import SearchBar from './components/SearchBar';
 import EmptyState from './components/EmptyState';
@@ -11,9 +12,8 @@ import DetailsGrid from './components/DetailGrid';
 import ForecastToggle from './components/ForecastToggle';
 import HourlyForecast from './components/HourlyForecast';
 import DailyForecast from './components/DailyForecast';
-import './App.css';
-import { useUnits } from './components/UnitContext';
 import SettingsPanel from './components/SettingsPanel';
+import './App.css';
 
 function App() {
     const { activeLocation, geolocationLoading } = useLocation();
@@ -24,9 +24,8 @@ function App() {
     return (
         <div className="app">
             <header className="app-header">
-                {/* 2. Wrap icon and title together */}
                 <div className="app-logo-container flex items-center gap-2">
-                    <Cloud className='logo' size={50}/>
+                    <Cloud className="logo" size={50} />
                     <h1 className="app-logo">Cloudy</h1>
                 </div>
 
@@ -48,7 +47,7 @@ function App() {
                     <div className="app-layout">
                         <div className="app-layout-left">
                             {error && <p className="app-error-banner">{error}</p>}
-                            <CurrentWeather location={activeLocation} weather={current} units={DEFAULT_UNITS} />
+                            <CurrentWeather location={activeLocation} weather={current} units={units} />
                         </div>
 
                         <div className="app-layout-right">

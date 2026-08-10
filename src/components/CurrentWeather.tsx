@@ -38,7 +38,7 @@ export default function CurrentWeather({ location, weather, units}: CurrentWeath
             </div>
 
             <div className="current-weather-icon">
-                <WeatherIcon icon={info.icon} size={80} />
+                <WeatherIcon icon={info.icon} size={110} />
             </div>
 
             <div className="current-temp">
