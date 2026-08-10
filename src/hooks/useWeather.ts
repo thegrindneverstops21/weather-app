@@ -29,7 +29,7 @@ interface CachedWeather {
 }
 
 const CACHE_PREFIX = "weather-app-cache";
-const CACHE_AGE_MAX = 30 * 60 * 100;
+const CACHE_AGE_MAX = 30 * 60 * 1000;
 
 function getCacheKey(location: Location) {
   return `${CACHE_PREFIX}${location.latitude.toFixed(2)}-${location.longitude.toFixed(2)}`;
@@ -81,6 +81,7 @@ export function useWeather(location: Location | null) {
     async function load() {
       setState((prev) => ({ ...prev, loading: true, error: null }));
       const cached = readCache(currentLocation);
+      const cacheIsFresh = cached && Date.now() - cached.fetchedAt < CACHE_AGE_MAX;
       if (cached && !cancelled) {
         setState({
           current: cached.current,
@@ -121,7 +122,9 @@ export function useWeather(location: Location | null) {
           setState((prev) => ({
             ...prev,
             loading: false,
-            error: "Showing cached data, failed to refresh",
+            error: cacheIsFresh
+              ? null
+              :"Showing cached data, failed to refresh",
           }));
         } else {
           setState({
