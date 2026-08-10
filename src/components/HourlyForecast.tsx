@@ -89,11 +89,11 @@ export default function HourlyForecast({ hourly, units }: HourlyForecastProps) {
             <button className="hourly-toggle-button" onClick={() => setExpanded((prev) => !prev)}>
                 {expanded ? (
                     <>
-                        Show Less <ChevronDown size={18} />
+                        Show Less <ChevronUp size={18} />
                     </>
                 ) : (
                     <>
-                        Show more <ChevronUp size={18} />
+                        Show more <ChevronDown size={18} />
                     </>
                 )}
             </button>

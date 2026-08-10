@@ -3,6 +3,29 @@ import { DEFAULT_UNITS, type UnitSettings } from "../types/weather";
 
 const STORAGE_KEY = 'weather-app-units';
 
+const VALID_VALUES: { [K in keyof UnitSettings]: UnitSettings[K][] } = {
+    temperature: ['C', 'F'],
+    windSpeed: ['km/h', 'mph'],
+    pressure: ['hPa', 'inHg'],
+    visibility: ['km', 'mi'],
+    precipitation: ['mm', 'in'],
+};
+
+// prevent outdated cache data from persisting
+function sanitizeUnits(raw: Partial<UnitSettings> | null): UnitSettings {
+    //fallback to default units if key is not the correct value
+    if(!raw) return DEFAULT_UNITS;
+
+    const result = {...DEFAULT_UNITS };
+    (Object.keys(DEFAULT_UNITS) as (keyof UnitSettings)[]).forEach((key) => {
+        const value = raw[key];
+        if (value && (VALID_VALUES[key] as string[]).includes(value as string)) {
+            (result as any)[key] = value;
+        }
+    });
+    return result;
+}
+
 interface UnitContextType {
     units: UnitSettings;
     setUnit: <K extends keyof UnitSettings>(key: K, value: UnitSettings[K]) => void;
@@ -14,7 +37,7 @@ const UnitContext = createContext<UnitContextType | undefined>(undefined);
 export function UnitProvider({ children }: { children: ReactNode }) {
     const [units, setUnits] = useState<UnitSettings>(() => {
         const saved = localStorage.getItem(STORAGE_KEY);
-        return saved ? JSON.parse(saved) : DEFAULT_UNITS;
+        return sanitizeUnits(saved ? JSON.parse(saved) : null);
     });
 
     useEffect(() => {
