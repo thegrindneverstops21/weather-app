@@ -72,6 +72,30 @@ export async function searchLocations(query: string) {
     return data.results ?? [];
 }
 
+export async function reverseGeocode(latitude: number, longitude: number): Promise<{ name: string; country: string}> {
+    const params = new URLSearchParams({
+        latitude: latitude.toString(),
+        longitude: longitude.toString(),
+        format: 'json',
+    });
+
+    const response = await fetch(`https://nominatim.openstreetmap.org/reverse?${params.toString()}&zoom=10`, {
+        headers: { 'Accept-Language': 'en' },
+    });
+
+    if(!response.ok) {
+        throw new Error(`Reverse geocoding error: ${response.status}`);
+    }
+
+    const data = await response.json();
+    const address = data.address ?? {};
+
+    const name = address.city ?? address.town ?? address.village ?? address.county ?? data.name ?? 'Current Location';
+    const country = address.country ?? '';
+
+    return { name, country}
+}
+
 /* a function that converts the current raw weather data  */
 export function mapCurrentWeather(raw: OpenMeteoResponse): CurrentWeather {
     const current = raw.current;

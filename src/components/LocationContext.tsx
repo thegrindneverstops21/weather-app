@@ -2,6 +2,7 @@ import { createContext, useContext, useEffect, useState } from 'react';
 import { type ReactNode } from 'react';
 import { type Location } from '../types/weather';
 import { useGeolocation } from '../hooks/useGeolocation';
+import { reverseGeocode } from '../services/weatherService';
 
 /* string keys for local storage to avoid rendundacy */
 const STORAGE_KEY = 'weather-app-location'; {/* stored location data*/}
@@ -40,7 +41,7 @@ export function LocationProvider({ children }: { children: ReactNode }) {
     /* provides and stores location if coordinates are available*/
     useEffect(() => {
         if (latitude !== null && longitude !== null) {
-            const detected: Location = {
+            const placeholder: Location = {
                 id: 'current-location', 
                 name: 'Current Location',
                 country: '',
@@ -48,10 +49,20 @@ export function LocationProvider({ children }: { children: ReactNode }) {
                 longitude,
                 isCurrentLocation: true,
             };
-            setCurrentLocation(detected);
-            setActiveLocationState((prev) => prev ?? detected);
+            setCurrentLocation(placeholder);
+            setActiveLocationState((prev) => prev ?? placeholder);
+
+            reverseGeocode(latitude, longitude).then(({ name, country}) => {
+                const resolved: Location = { ...placeholder, name, country };
+                setCurrentLocation(resolved);
+                setActiveLocationState((prev) => prev?.id === 'current-location' ? resolved : prev);
+            })
+            .catch((err) => {
+                console.error('reverse geocoding failed: ', err);
+            })
         }
     }, [latitude, longitude]);
+
     /* persist location as saved location to local storage */
     useEffect(() => {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(savedLocations));
