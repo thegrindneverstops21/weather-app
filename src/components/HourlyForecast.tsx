@@ -3,9 +3,8 @@ import { getWeatherInfo } from '../services/weatherCodeMap';
 import { convertTemperature, formatValue } from '../services/unitConversions';
 import WeatherIcon from './WeatherIcon';
 import './styles/HourlyForecast.css';
-import { useRef, useState, type MouseEvent } from 'react';
+import { useState } from 'react';
 import { ChevronDown, ChevronUp } from 'lucide-react';
-import { findCurrentHourIndex } from '../services/weatherService';
 
 interface HourlyForecastProps {
     hourly: HourlyWeather[];
