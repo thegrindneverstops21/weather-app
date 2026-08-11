@@ -15,10 +15,12 @@ import DailyForecast from './components/DailyForecast';
 import SettingsPanel from './components/SettingsPanel';
 import './App.css';
 import SavedLocations from './components/SavedLocations';
+import { findCurrentHourIndex } from './services/weatherService';
 
 function App() {
     const { activeLocation, geolocationLoading } = useLocation();
     const { current, hourly, daily, loading, error } = useWeather(activeLocation);
+    const currentHourIndex = current ? findCurrentHourIndex(hourly, current.time) : 0;
     const { units } = useUnits();
     const [view, setView] = useState<ForecastView>('hourly');
 
@@ -55,14 +57,14 @@ function App() {
                             <ForecastToggle view={view} onChange={setView} />
 
                             {view === 'hourly' ? (
-                                <HourlyForecast hourly={hourly} units={units} />
+                                <HourlyForecast hourly={hourly} units={units} currentHourIndex={currentHourIndex}/>
                             ) : (
                                 <DailyForecast daily={daily} units={units} />
                             )}
 
                             <DetailsGrid
                                 current={current}
-                                hourlyNow={hourly[0]}
+                                hourlyNow={hourly[currentHourIndex]}
                                 dailyToday={daily[0]}
                                 units={units}
                             />
