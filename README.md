@@ -1,75 +1,84 @@
-# React + TypeScript + Vite
+# Cloudy — Weather App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A responsive, location-aware weather app built with React, TypeScript, and Vite. Built as Task 3 of the CodeTribe 2026–2027 Work-Integrated Learning Programme (ReactTS track).
 
-Currently, two official plugins are available:
+**Live demo:** [weather-app-ten-xi-16.vercel.app](https://weather-app-ten-xi-16.vercel.app/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Features
 
-## React Compiler
+- **Real-time weather**: current temperature, condition, humidity, wind, pressure, UV index, dew point, visibility, sunrise/sunset
+- **Hourly & daily forecasts**: toggle between views; the hourly strip aligns to the current hour and highlights it as "Now"
+- **Location detection & search**: auto-detects the user's location (with a graceful empty state if permission is denied), debounced city search via geocoding
+- **Multiple saved locations**: bookmark any searched city and switch between them; the current (GPS) location is always available separately
+- **Custom units**: Celsius/Fahrenheit, km/h/mph, hPa/inHg, km/mi, mm/in — switching is instant, no refetch
+- **Light & dark theme**: persisted across sessions
+- **Offline access**: weather data is cached to `localStorage`; cached data displays immediately on revisit while a fresh fetch happens in the background
+- **Fully responsive**: tested at 320px, 480px, 768px, 1024px, and 1200px breakpoints
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Tech Stack
 
-## Expanding the ESLint configuration
+| | |
+|---|---|
+| Framework | React 19 + TypeScript |
+| Build tool | Vite |
+| Routing | react-router-dom v6+ |
+| Icons | lucide-react |
+| Weather data | [Open-Meteo API](https://open-meteo.com/) (no API key required) |
+| Reverse geocoding | [Nominatim (OpenStreetMap)](https://nominatim.openstreetmap.org/) |
+| State | React Context (Theme, Location, Units) |
+| Persistence | `localStorage` (theme, locations, units, weather cache) |
+| Styling | Plain CSS with custom properties (CSS variables) for theming |
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Getting Started
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+```bash
+# clone the repo
+git clone https://github.com/thegrindneverstops21/weather-app.git
+cd weather-app
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+# install dependencies
+npm install
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+# start the dev server
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+The app runs at `http://localhost:5173` by default.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### Other scripts
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm run build     # type-check with tsc, then build for production
+npm run preview   # preview the production build locally
+npm run lint      # run ESLint
+```
+
+## Project Structure
 
 ```
+src/
+  components/       # UI components (CurrentWeather, HourlyForecast, DetailCard, etc.)
+    styles/         # per-component CSS files
+  hooks/            # useWeather, useGeolocation
+  services/         # weatherService (API + mappers), unitConversions, weatherCodeMap
+  types/            # shared TypeScript types (weather.ts)
+  assets/           # images and illustrations
+```
+
+Architecture follows a layered approach: **components** stay presentational and receive data via props, **hooks** isolate side effects (API calls, browser APIs), **services** are plain framework-agnostic functions (data mapping, unit conversion, WMO weather code lookups), and **context providers** hold persisted global state (theme, location, units).
+
+## Known Limitations / Roadmap
+
+- **Weather alerts**: push notifications for severe conditions are planned but not yet implemented.
+- **Precipitation display**: precipitation probability is fetched from the API and has a unit setting (mm/in), but isn't yet surfaced on a detail card.
+- **Action feedback**: saving/removing a location currently happens silently; toast-style confirmations are planned.
+
+## Data Sources
+
+Weather and forecast data is provided free of charge by [Open-Meteo](https://open-meteo.com/), which requires no API key. Reverse geocoding (converting GPS coordinates to a place name) uses [OpenStreetMap's Nominatim service](https://nominatim.openstreetmap.org/).
+
+## Author
+
+**Sam Junior Ndlovu**
+CodeTribe 2026–2027 WIL Programme · Tshwane University of Technology, Polokwane
+GitHub: [@thegrindneverstops21](https://github.com/thegrindneverstops21)
