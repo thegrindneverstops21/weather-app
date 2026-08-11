@@ -33,7 +33,7 @@ export default function HourlyForecast({ hourly, units, currentHourIndex }: Hour
                     const info = getWeatherInfo(code, true);
                     const hourTime = Array.isArray(hour.time) ? hour.time[0] : hour.time;
                     const temperature = Array.isArray(hour.temperature) ? hour.temperature[0] : hour.temperature;
-                    const time = isNow ? 'Now' : new Date(hourTime).toLocaleDateString('en-ZA',{ hour: 'numeric' });
+                    const time = isNow ? 'Now' : String(new Date(hourTime).getHours()).padStart(2, '0');
                 
                     return (
                         <div key={hourTime} className={`hourly-item ${isNow ? 'now' : ''} ${isPast ? 'past' : ''}`}>

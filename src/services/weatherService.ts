@@ -74,9 +74,10 @@ export async function searchLocations(query: string) {
 
 export async function reverseGeocode(latitude: number, longitude: number): Promise<{ name: string; country: string}> {
     const params = new URLSearchParams({
-        latitude: latitude.toString(),
-        longitude: longitude.toString(),
-        format: 'json',
+        lat: latitude.toString(),
+        lon: longitude.toString(),
+        format: 'jsonv2',
+        zoom: '10',
     });
 
     const response = await fetch(`https://nominatim.openstreetmap.org/reverse?${params.toString()}&zoom=10`, {
