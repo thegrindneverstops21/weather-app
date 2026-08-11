@@ -4,6 +4,7 @@ import { convertTemperature, formatValue } from '../services/unitConversions';
 import WeatherIcon from './WeatherIcon';
 import { MapPin } from 'lucide-react';
 import './styles/CurrentWeather.css';
+import SaveLocationButton from './SaveLocationButton';
 
 /* interface that represents the location, weather and unit of measurement */
 interface CurrentWeatherProps {
@@ -13,7 +14,7 @@ interface CurrentWeatherProps {
 }
 
 /* a function component*/
-export default function CurrentWeather({ location, weather, units}: CurrentWeatherProps ){
+export default function CurrentWeather({ location, weather, units }: CurrentWeatherProps) {
     const info = getWeatherInfo(weather.weatherCode, weather.isDay);
     const temp = convertTemperature(weather.temperature, units.temperature);
 
@@ -30,12 +31,16 @@ export default function CurrentWeather({ location, weather, units}: CurrentWeath
         minute: '2-digit',
     });
 
-    return(
+    return (
         <div className="current-weather">
-            <div className="location-pill">
-                {location.isCurrentLocation && <MapPin size={14} />}
-                <span>{location.name}</span>
+            <div className="current-weather-top">
+                <div className="location-pill">
+                    {location.isCurrentLocation && <MapPin size={14} />}
+                    <span>{location.name}</span>
+                </div>
+                <SaveLocationButton location={location} />
             </div>
+
 
             <div className="current-weather-icon">
                 <WeatherIcon icon={info.icon} size={110} />

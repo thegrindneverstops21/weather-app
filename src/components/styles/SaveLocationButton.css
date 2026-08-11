@@ -1,0 +1,25 @@
+.save-location-btn {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  margin-left: 0.5rem;
+  transition:
+    transform var(--transition),
+    color var(--transition),
+    border-color var(--transition);
+}
+
+.save-location-btn:hover {
+    transform: scale(1.08);
+}
+
+.save-location-btn.active {
+    color: var(--accent);
+    border-color: var(--accent);
+}

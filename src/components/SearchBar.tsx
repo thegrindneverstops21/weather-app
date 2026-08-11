@@ -16,7 +16,7 @@ export default function SearchBar({ onLocationSelect }: SearchBarProps) {
     const [open, setOpen] = useState(false);
     const containerRef = useRef<HTMLDivElement>(null);
 
-    const { addLocation, setActiveLocation } = useLocation();
+    const { setActiveLocation } = useLocation();
 
     /* debounced search: waits 400ms after typing stops before calling the API */
     useEffect(() => {
@@ -63,7 +63,6 @@ export default function SearchBar({ onLocationSelect }: SearchBarProps) {
 
     // A function that adds/saves the location selected by the user
     const handleSelect = (location: Location) => {
-        addLocation(location);
         setActiveLocation(location);
         setQuery('');
         setResults([]);

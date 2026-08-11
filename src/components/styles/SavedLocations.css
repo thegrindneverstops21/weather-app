@@ -1,0 +1,53 @@
+.saved-locations {
+  display: flex;
+  gap: 0.6rem;
+  overflow-x: auto;
+  padding: 0.25rem 0.25rem 0.75rem;
+  scrollbar-width: none;
+  margin-top: 1rem;
+}
+
+.saved-locations::-webkit-scrollbar {
+  display: none;
+}
+
+.location-chip {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 0.5rem 0.9rem;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  transition:
+    background var(--transition),
+    color var(--transition),
+    border-color var(--transition);
+}
+
+.location-chip:hover {
+    background: var(--bg-primary);
+    filter: none;
+}
+
+.location-chip.active {
+    background: var(--accent);
+    color: white;
+    border-color: var(--accent);
+}
+
+.location-chip-remove {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: inherit;
+    opacity: 0.7;
+    margin-left: 0.1rem;
+}
+
+.location-chip-remove:hover {
+    opacity: 1;
+}

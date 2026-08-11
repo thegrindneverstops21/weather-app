@@ -93,6 +93,7 @@
     overflow-x: auto;
     scrollbar-width: none;
     cursor: grab;
+    -webkit-user-select: none;
     user-select: none;
     touch-action: pan-x;
     min-width: 0;

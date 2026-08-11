@@ -14,6 +14,7 @@ import HourlyForecast from './components/HourlyForecast';
 import DailyForecast from './components/DailyForecast';
 import SettingsPanel from './components/SettingsPanel';
 import './App.css';
+import SavedLocations from './components/SavedLocations';
 
 function App() {
     const { activeLocation, geolocationLoading } = useLocation();
@@ -35,7 +36,7 @@ function App() {
                     <ThemeToggle />
                 </div>
             </header>
-
+            <SavedLocations />
             <main className="app-main">
                 {geolocationLoading ? (
                     <p className="app-loading">Getting your location...</p>
