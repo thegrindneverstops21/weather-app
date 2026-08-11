@@ -5,77 +5,38 @@ import WeatherIcon from './WeatherIcon';
 import './styles/HourlyForecast.css';
 import { useRef, useState, type MouseEvent } from 'react';
 import { ChevronDown, ChevronUp } from 'lucide-react';
+import { findCurrentHourIndex } from '../services/weatherService';
 
 interface HourlyForecastProps {
     hourly: HourlyWeather[];
     units: UnitSettings;
+    currentHourIndex: number;
 }
 
 const COLLAPSED_COUNT = 7;
 
-export default function HourlyForecast({ hourly, units }: HourlyForecastProps) {
-    const [expanded, setExpanded] = useState(false);
-    const scrollRef = useRef<HTMLDivElement>(null);
+export default function HourlyForecast({ hourly, units, currentHourIndex }: HourlyForecastProps) {
+    const [expanded, setExpanded] = useState(false);  
     
-    // Tracks if mouse button is pressed
-    const isDown = useRef(false);
-    // tracks the start point of drag
-    const startX = useRef(0);
-    // remembers the start value of drag
-    const scrollLeft = useRef(0);
-    // checks how many cards to display
-    const items = expanded ? hourly.slice(0, 24) : hourly.slice(0, COLLAPSED_COUNT);
-
-    // Mouse Event Handlers: []
-    const handleMouseDown = (e: MouseEvent<HTMLDivElement>) => {
-        if (!expanded || !scrollRef.current) return; // Only drag when expanded
-        isDown.current = true;
-        scrollRef.current.classList.add('grabbing');
-        startX.current = e.pageX - scrollRef.current.offsetLeft;
-        scrollLeft.current = scrollRef.current.scrollLeft;
-    };
-
-    const handleMouseLeaveOrUp = () => {
-        isDown.current = false;
-        if (scrollRef.current) {
-            scrollRef.current.classList.remove('grabbing');
-        }
-    };
-
-    const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
-        if (!isDown.current || !scrollRef.current || !expanded) return;
-        e.preventDefault(); // Stop default text highlighting
-        const x = e.pageX - scrollRef.current.offsetLeft;
-        const walk = (x - startX.current) * 1.5; // Drag speed modifier
-        scrollRef.current.scrollLeft = scrollLeft.current - walk;
-    };
+    const baseIndex = expanded ? 0 : currentHourIndex;
+    const items = expanded ? hourly.slice(0, 24) : hourly.slice(currentHourIndex, currentHourIndex + COLLAPSED_COUNT);
 
     return (
         <div className="hourly-forecast-wrap">
-            <div 
-                className={`hourly-forecast ${expanded ? 'scrollable' : ''}`} 
-                ref={scrollRef}
-                onMouseDown={handleMouseDown}
-                onMouseLeave={handleMouseLeaveOrUp}
-                onMouseUp={handleMouseLeaveOrUp}
-                onMouseMove={handleMouseMove}
-                style={{
-                    cursor: expanded ? 'grab' : 'default',
-                    userSelect: expanded ? 'none' : 'auto',
-                    WebkitUserSelect: expanded ? 'none' : 'auto'
-                }}
-            >
-                {items.map((hour) => {
+            <div className='hourly-forecast'>
+                {items.map((hour, i) => {
+                    const absIndex = baseIndex + i;
+                    const isNow = absIndex === currentHourIndex;
+                    const isPast = absIndex < currentHourIndex;
+
                     const code = Array.isArray(hour.weatherCode) ? hour.weatherCode[0] : hour.weatherCode;
                     const info = getWeatherInfo(code, true);
                     const hourTime = Array.isArray(hour.time) ? hour.time[0] : hour.time;
                     const temperature = Array.isArray(hour.temperature) ? hour.temperature[0] : hour.temperature;
-                    const time = new Date(hourTime).toLocaleTimeString('en-ZA', {
-                        hour: 'numeric',
-                    });
-
+                    const time = isNow ? 'Now' : new Date(hourTime).toLocaleDateString('en-ZA',{ hour: 'numeric' });
+                
                     return (
-                        <div key={hourTime} className="hourly-item">
+                        <div key={hourTime} className={`hourly-item ${isNow ? 'now' : ''} ${isPast ? 'past' : ''}`}>
                             <span className="hourly-time">{time}</span>
                             <WeatherIcon icon={info.icon} size={30} />
                             <span className="hourly-temp">
