@@ -1,12 +1,11 @@
 .hourly-forecast {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
     gap: 0.75rem;
     padding: 1rem 0.25rem;
-    flex-wrap: wrap;
 }
 
 .hourly-item {
-    flex: 0 0 auto;
     background: var(--bg-card);
     border-radius: var(--radius);
     padding: 1rem 0.6rem;
@@ -16,8 +15,21 @@
     gap: 0.6rem;
     box-shadow: 0 2px 8px var(--shadow);
     color: var(--accent);
-    width: 90px;
-    pointer-events: none;
+    transition: opacity var(--transition), background var(--transition);
+}
+
+.hourly-item.now {
+    background: var(--accent);
+    color: white;
+}
+
+.hourly-item.now .hourly-time,
+.hourly-item.now .hourly-temp {
+    color: white;
+}
+
+.hourly-item.past {
+    opacity: 0.5;
 }
 
 .hourly-time {
@@ -40,35 +52,6 @@
     width: 100%;
 }
 
-.hourly-forecast-row {
-    position: relative;
-    display: flex;
-    align-items: center;
-}
-
-.hourly-scroll-btn {
-    flex-shrink: 0;
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: 50%;
-    width: 32px;
-    height: 32px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--text-primary);
-    box-shadow: 0 2px 6px var(--shadow);
-    z-index: 5;
-}
-.hourly-scroll-btn-left {
-    margin-right: 0.4rem;
-}
-
-.hourly-scroll-btn-right {
-    margin-left: 0.4rem;
-}
-
-
 .hourly-toggle-button {
     display: flex;
     align-items: center;
@@ -85,39 +68,4 @@
 
 .hourly-toggle-button:hover {
     background: var(--bg-card);
-}
-
-/* Enable native swipe physics for mobile touch devices */
-.hourly-forecast.scrollable {
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    scrollbar-width: none;
-    cursor: grab;
-    -webkit-user-select: none;
-    user-select: none;
-    touch-action: pan-x;
-    min-width: 0;
-    width: 100%;
-}
-
-.hourly-forecast.scrollable:active {
-    cursor: grabbing;
-}
-
-.hourly-forecast.scrollable::-webkit-scrollbar {
-    display: none; 
-}
-
-@media (min-width: 768px) {
-    .hourly-item{
-        width: 100px;
-    }
-}
-
-@media(max-width: 480px) {
-    .hourly-forecast:not(.scrollable) {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 0.5rem;
-    }
 }
