@@ -6,7 +6,7 @@ import './styles/SavedLocations.css'
 export default function SavedLocations() {
     const { currentLocation, savedLocations, activeLocation, setActiveLocation, removeLocation } = useLocation();
 
-    const chips: Location[] = currentLocation ? [currentLocation, ...savedLocations.filter((l) => l.id! === currentLocation.id)] : savedLocations;
+    const chips: Location[] = currentLocation ? [currentLocation, ...savedLocations.filter((l) => l.id !== currentLocation.id)] : savedLocations;
 
     if (chips.length === 0) return null;
 

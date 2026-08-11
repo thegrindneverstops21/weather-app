@@ -141,3 +141,12 @@ export function mapDailyWeather(raw: OpenMeteoResponse): DailyWeather[] {
         precipitationProbability: daily.precipitation_probability_max[index],
     }));
 }
+
+export function findCurrentHourIndex(hourly: HourlyWeather[], currTime: string): number {
+    const currentHourStamp = currTime.slice(0, 13);
+    const i = hourly.findIndex((h) => {
+        const t = Array.isArray(h.time) ? h.time[0] : h.time;
+        return t.slice(0, 13) === currentHourStamp;
+    });
+    return i === -1 ? 0: i;
+}
