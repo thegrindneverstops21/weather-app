@@ -1,6 +1,10 @@
 # Cloudy — Weather App
 
+<img src="https://socialify.git.ci/thegrindneverstops21/weather-app/image?language=1&owner=1&name=1&stargazers=1&theme=Light" alt="weather-app" width="640" height="320" />
+
 A responsive, location-aware weather app built with React, TypeScript, and Vite. Built as Task 3 of the CodeTribe 2026–2027 Work-Integrated Learning Programme (ReactTS track).
+<img width="1920" height="916" alt="image" src="https://github.com/user-attachments/assets/7e9e1186-eac3-48ec-81db-37c97f1eca59" />
+
 
 **Live demo:** [weather-app-ten-xi-16.vercel.app](https://weather-app-ten-xi-16.vercel.app/)
 
@@ -14,6 +18,7 @@ A responsive, location-aware weather app built with React, TypeScript, and Vite.
 - **Light & dark theme**: persisted across sessions
 - **Offline access**: weather data is cached to `localStorage`; cached data displays immediately on revisit while a fresh fetch happens in the background
 - **Fully responsive**: tested at 320px, 480px, 768px, 1024px, and 1200px breakpoints
+<img width="1919" height="918" alt="image" src="https://github.com/user-attachments/assets/3ef0dc50-d66e-4ce1-8292-f6233df787d1" />
 
 ## Tech Stack
 
@@ -28,6 +33,7 @@ A responsive, location-aware weather app built with React, TypeScript, and Vite.
 | State | React Context (Theme, Location, Units) |
 | Persistence | `localStorage` (theme, locations, units, weather cache) |
 | Styling | Plain CSS with custom properties (CSS variables) for theming |
+<img width="1919" height="918" alt="image" src="https://github.com/user-attachments/assets/99d2375a-874a-4284-b71d-1423cc522895" />
 
 ## Getting Started
 
